@@ -49,7 +49,11 @@ PHP_FUNCTION(test_test2)
 PHP_MINIT_FUNCTION(test)
 {
     zend_hash_str_del(CG(function_table), ZEND_STRL("test_test2"));
-    return SUCCESS;
+	// EG(persistent_functions_count) = CG(function_table)->nNumUsed;
+	// if (CG(function_table)) {
+	EG(persistent_functions_count) = CG(function_table)->nNumUsed;
+	// }
+	return SUCCESS;
 }
 /* }}} */
 
